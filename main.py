@@ -15,6 +15,9 @@ height = 900
 goalheight = 50
 
 def check_bound(area: pg.Rect, obj: pg.Rect) -> tuple[bool, bool]:
+    """
+    ホッケーの玉の移動範囲を指定
+    """
     
     yoko, tate = True, True
     if obj.left < area.left or area.right < obj.right:  # 横方向のはみ出し判定
@@ -26,10 +29,7 @@ def check_bound(area: pg.Rect, obj: pg.Rect) -> tuple[bool, bool]:
 
 def check_bound_hockey(scr_rect: pg.Rect, obj_rect: pg.Rect):
     """
-    オブジェクトが画面内or画面外を判定する
-    引数：画面SurfaceのRect
-    引数：こうかとん，または，爆弾SurfaceのRect
-    戻り値：横方向，縦方向のはみ出し判定結果（画面内：True／画面外：False）
+    ホッケーの動く範囲を指定
     """
     yoko, tate = True, True
     if obj_rect.center <  scr_rect.center:
@@ -98,16 +98,16 @@ def main():
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT: return
-        screen.fill((0,0,0))
-        pg.draw.line(screen, blue,(0,0), (screen.get_width()/2 - 5,0) ,20)
-        pg.draw.line(screen, blue,(0,screen.get_height()), (screen.get_width()/2 - 5,screen.get_height()) ,20)
-        pg.draw.line(screen, red, (screen.get_width()/2+5,0), (screen.get_width() ,0) ,20)
-        pg.draw.line(screen, red, (screen.get_width()/2 + 5,screen.get_height()) , (screen.get_width(),screen.get_height()) ,20)
-        pg.draw.line(screen,white,(width/2,0),(width/2,height),5)
-        pg.draw.line(screen, (0, 0, 255), (0,0), (0,screen.get_height()/2-goalheight) ,20)
-        pg.draw.line(screen, (0, 0, 255), (0,screen.get_height()/2 + goalheight), (0,screen.get_height()) ,20)
-        pg.draw.line(screen, (255, 0, 0), (screen.get_width(),0), (screen.get_width(),screen.get_height()/2-goalheight) ,20)
-        pg.draw.line(screen, (255, 0, 0), (screen.get_width(),screen.get_height()/2 + goalheight), (screen.get_width(),screen.get_height()) ,20)
+        screen.fill((0,0,0))  # フィールドについて
+        pg.draw.line(screen, blue,(0,0), (screen.get_width()/2 - 5,0) ,20)  # フィールドについて
+        pg.draw.line(screen, blue,(0,screen.get_height()), (screen.get_width()/2 - 5,screen.get_height()) ,20)  # フィールドについて
+        pg.draw.line(screen, red, (screen.get_width()/2+5,0), (screen.get_width() ,0) ,20)  # フィールドについて
+        pg.draw.line(screen, red, (screen.get_width()/2 + 5,screen.get_height()) , (screen.get_width(),screen.get_height()) ,20)  # フィールドについて
+        pg.draw.line(screen,white,(width/2,0),(width/2,height),5)  # フィールドについて
+        pg.draw.line(screen, (0, 0, 255), (0,0), (0,screen.get_height()/2-goalheight) ,20)  # フィールドについて
+        pg.draw.line(screen, (0, 0, 255), (0,screen.get_height()/2 + goalheight), (0,screen.get_height()) ,20)  # フィールドについて
+        pg.draw.line(screen, (255, 0, 0), (screen.get_width(),0), (screen.get_width(),screen.get_height()/2-goalheight) ,20)  # フィールドについて
+        pg.draw.line(screen, (255, 0, 0), (screen.get_width(),screen.get_height()/2 + goalheight), (screen.get_width(),screen.get_height()) ,20)  # フィールドについて
 
         key_lst = pg.key.get_pressed()
         pl1.update(key_lst,screen)
